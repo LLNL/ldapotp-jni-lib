@@ -13,6 +13,7 @@
 Name: @PROJECT@
 Version: @VERSION@
 Release: @RELEASE@%{?dist}
+Provides: libLdapOtpJni
 
 Summary: LDAPTOTP Java Native Interface Wrapper
 License: GPL/BSD
