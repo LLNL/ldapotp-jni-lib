@@ -13,15 +13,16 @@
 Name: @PROJECT@
 Version: @VERSION@
 Release: @RELEASE@%{?dist}
-Provides: libLdapOtpJni
 
 Summary: LDAPTOTP Java Native Interface Wrapper
 License: GPL/BSD
 Group: System Environment/Libraries
 BuildRoot: %{_tmppath}/@PROJECT@-@VERSION@-@RELEASE@
 Source: @PROJECT@-@VERSION@.tar.gz
-Requires: llnl-ldapotp-clt-auth-libs libgcj
-BuildRequires: llnl-ldapotp-clt-auth-libs llnl-ldapotp-clt-auth-devel libgcj libgcj-devel
+Requires: llnl-ldapotp-clt-auth-libs
+BuildRequires: llnl-ldapotp-clt-auth-libs llnl-ldapotp-clt-auth-devel java-devel
+##Requires: llnl-ldapotp-clt-auth-libs libgcj
+##BuildRequires: llnl-ldapotp-clt-auth-libs llnl-ldapotp-clt-auth-devel libgcj libgcj-devel
 
 %description
 llnl-ldapotp-clt-jni-auth-libs provides an simple java wrapper around the ldapotp client libraries
@@ -60,13 +61,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 # Standardize the location of LDAP/OTP libs
 ( cd $RPM_BUILD_ROOT
         mkdir -p $RPM_BUILD_ROOT%{_libdir}
-        mkdir -p %{_lib}/ldapotp
-        cd %{_lib}/ldapotp
-        ln -sf ../..%{ldapotp_libdir}/* .
         cd $RPM_BUILD_ROOT%{_libdir}
         ln -sf ../..%{ldapotp_libdir}/libLdapOtpJni.so .
-        cd $RPM_BUILD_ROOT/%{_lib}/ldapotp
-        rm -f libLdapOtpJni.la libLdapOtpJni.so.*
 )
 
 %ifos linux
@@ -88,7 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 %{ldapotp_libdir}/libLdapOtpJni.*
 # Adding the standardize location for libraries
 %{_libdir}/libLdapOtpJni.so
-/%{_lib}/ldapotp/libLdapOtpJni.*
+#/%{_lib}/ldapotp/libLdapOtpJni.*
 %doc ChangeLog
 %doc INSTALL
 %doc LICENSE

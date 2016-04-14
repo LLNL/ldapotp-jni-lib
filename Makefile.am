@@ -1,4 +1,6 @@
-INCLUDES = -I$(includedir)/ldapotp $(GLIB_CFLAGS)
+JAVAHOME=/usr/lib/jvm/java
+
+INCLUDES = -I$(includedir)/ldapotp -I$(JAVAHOME)/include -I$(JAVAHOME)/include/linux $(GLIB_CFLAGS)
 
 lib_LTLIBRARIES = src/libLdapOtpJni.la
 
